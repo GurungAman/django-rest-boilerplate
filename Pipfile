@@ -5,8 +5,14 @@ name = "pypi"
 
 [packages]
 django = "*"
+djangorestframework = "*"
+pyjwt = "*"
+django-cors-headers = "*"
+drf-yasg = "*"
 
 [dev-packages]
+autopep8 = "*"
+django-silk = "*"
 
 [requires]
 python_version = "3.9"
