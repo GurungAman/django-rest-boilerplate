@@ -1,3 +1,4 @@
+import traceback
 
 from django.conf import settings
 from django.http import JsonResponse
@@ -22,8 +23,7 @@ def custom_exception_handler(exc, context):
         return drf_exception
 
     if settings.DEBUG:
-        import traceback
-        traceback.format_exc()
+        print(traceback.format_exc())
 
     # respond with internal server error to all
     # exceptions except the ones defined by DRF
