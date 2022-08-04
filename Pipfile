@@ -9,6 +9,8 @@ djangorestframework = "*"
 pyjwt = "*"
 django-cors-headers = "*"
 drf-yasg = "*"
+python-decouple = "*"
+psycopg2 = "*"
 
 [dev-packages]
 autopep8 = "*"
