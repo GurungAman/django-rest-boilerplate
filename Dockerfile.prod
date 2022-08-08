@@ -1,0 +1,34 @@
+FROM python:3.9-alpine
+# FROM python:3.9
+
+
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+#  dependencies for psycopg2 and numpy/pandas
+RUN apk update \
+    && apk add make automake gcc g++ subversion \
+    python3-dev \
+    postgresql-dev \
+    musl-dev
+
+# if its not an alpine image, install the following dependencies
+# RUN apt-get update
+# RUN apt-get -y install gcc postgresql-server-dev-all python3-dev musl-dev
+
+RUN mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app
+
+COPY requirements.txt .dockerignore ./
+
+# modify permissions for the entrypoint.sh before running the docker build
+COPY entrypoint.sh .
+RUN chmod +x /usr/src/app/entrypoint.sh
+
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
+
+COPY . .
+
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
